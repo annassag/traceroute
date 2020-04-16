@@ -6,12 +6,20 @@ var Traceroute = require('nodejs-traceroute');
 
 app.use(express.static('public'));
 
-app.get('/', function(req, res) {
-	res.sendFile(__dirname + 'public/index.html');
+app.get('/trace', function(req, res) {
+	console.log('TRACE')
+	res.sendFile(__dirname + '/public/trace.html');
+});
+
+app.get('*', function(req, res) {
+	console.log('here')
+	res.sendFile(__dirname + '/public/search.html');
 });
 
 io.on('connection', function(socket) {
 	console.log('connection');
+	let url = socket.handshake.query.url
+	console.log('url', url)
 
 	try {
     	const tracer = new Traceroute();
@@ -30,7 +38,7 @@ io.on('connection', function(socket) {
 	            console.log(`close: code ${code}`);
 	        });
 	 
-	    tracer.trace('art.yale.edu');
+	    tracer.trace(url);
 	} catch (ex) {
 	    console.log(ex);
 	}
