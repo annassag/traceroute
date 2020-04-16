@@ -1,0 +1,27 @@
+{
+  "name": "trace-two",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "crapify": "^1.2.0",
+    "domain-digger": "0.0.3",
+    "express": "^4.17.1",
+    "express-throttle-bandwidth": "^1.0.1",
+    "geoip-lite": "^1.4.0",
+    "geopoint": "^1.0.1",
+    "iso-3166-1-alpha-2": "^1.0.0",
+    "latlon-geohash": "^2.0.0",
+    "nodejs-traceroute": "^1.2.0",
+    "save": "^2.4.0",
+    "socket.io": "^2.3.0",
+    "throttle": "^1.0.3",
+    "throttleit": "^1.0.0",
+    "whois-ux": "0.0.2"
+  }
+}

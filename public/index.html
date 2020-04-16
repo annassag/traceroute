@@ -1,0 +1,165 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Trace Route</title>
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+        <style type="text/css">
+        body {
+            margin: 0;
+            background-image: url("3.jpg");
+            width: 100%;
+            background-position: top;
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding-left: 20px;
+        }
+            
+        .url {
+            padding-top: 20px;
+            padding-bottom: 0;
+            margin-bottom: 0;
+            height: 25px;
+            width: 1500px;
+            font-size: 25px;
+            font-family: "Terminal";
+            color: #5babfc;
+        }
+
+        #log {
+            margin: auto;
+            width: 1200px;
+            height: 400px;
+            position: absolute;
+            left: 12%;
+            top: 39%;
+            font-size: 65px;
+            font-family: "Terminal";
+            text-align: center;
+            color: #5babfc;
+        }
+
+        @font-face {
+            font-family: 'Terminal';
+            src: url('Terminal-One.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Option';
+            src: url('Option-ReguarItalic.woff2') format('woff2');
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        @font-face {
+            font-family: 'MoS Field Grot Cond';
+            src: url('MoSFieldGrotNarrow-Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: italic;
+        }
+
+        </style>  
+        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>  
+        </head>
+    <body>
+        <body>
+        <div class="background"></div>
+        <div class="url">https://www.art.yale.edu...</div>
+        <div id="city"></div>
+        <div id="log"></div>
+
+    <script src="/lib/socket.io.js"></script>
+    <script>
+
+        var imageArray = [
+        "1.jpg",
+        "1.jpg",
+        "2.jpg",
+        "3.jpg",
+        "4.jpg",
+        "5.jpg",
+        "6.jpg",
+        "7.jpg",
+        ];
+
+        function changeBgImage(){
+        $('body').css({'background-image': 'url(/' + imageArray[Math.floor(Math.random() * imageArray.length)] + ')'});
+        };
+
+        var myVar = setInterval(changeBgImage, 20);
+
+        function stopBgImage() {
+            clearInterval(myVar);
+        };
+
+        setTimeout(stopBgImage, 4000);
+        setTimeout(function () {window.location.href = 'https://www.art.yale.edu/';}, 10000);
+            var socket = io();
+            socket.on('hop', function(hop) {
+                // console.log(hop);
+                // console.log(hop.hop);
+                // console.log(hop.ip);
+                // console.log(hop.rtt1);
+                // console.log(''); 
+            var request = new XMLHttpRequest();
+            var ip = hop.ip 
+            request.open('GET', `http://ip-api.com/json/${ ip }?fields=country,city,isp,query`);
+            request.setRequestHeader('Accept', 'application/json');
+            request.onreadystatechange = function (name) {
+                if (this.readyState === 4) {
+                var myObj = JSON.parse(this.responseText);
+                var country = myObj.country;
+                var city = myObj.city;
+                var isp = myObj.isp;
+                var query = myObj.query;
+                
+                    if (country === undefined) {
+                        return null
+                    } 
+                    else {
+                                        
+                    var fonts = [
+                      "MoS Field Grot Cond",
+                      "MoS Field Grot Cond",
+                      "Option",
+                    ];
+
+                    var div = $('<div id="city">')
+                    .css({
+                        'width': '210px',
+                        'height':'40px',
+                        "color": 'white',
+                        "font-family": fonts[Math.floor(Math.random() * fonts.length)],
+                        "font-size": '17px',
+                        "pointer-events": 'none',
+                        "display": 'inline-block',
+                        "padding-top": '15px',
+                        'top':'30px',
+                    })
+                    .append($('<div id="city">').innerText=city + ', ' +country + '<br>' +isp + '<br>' +query + '</div>')
+                    .appendTo(document.body);
+                    }
+
+                    document.getElementById("log").innerText=city + ', ' +country + '\n' +isp + "\n" +query;
+                    console.log(country);
+                    console.log(city);
+                    console.log(isp);
+                    console.log(query);
+                    }
+                };  
+
+            request.send();
+            });  
+
+        </script>
+
+        <iframe src="silence.mp3" allow="autoplay" id="audio" style="display: none"></iframe>
+        <audio id="player" autoplay loop><source src="noise.mp3" type="audio/mp3"></audio>
+
+    </body>
+</html>
+
+
+
