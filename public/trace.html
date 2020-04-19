@@ -61,16 +61,22 @@
         }
 
         </style>  
-        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>  
+        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         </head>
     <body>
         <body>
         <div class="background"></div>
-        <div class="url">https://www.art.yale.edu...</div>
+        <div class="url" id="displayUrl">...</div>
         <div id="city"></div>
         <div id="log"></div>
 
     <script src="/lib/socket.io.js"></script>
+    <script>
+        var urlParams = new URLSearchParams(window.location.search);
+        var targetUrl = urlParams.get('url');
+        var element = document.getElementById('displayUrl')
+        element.innerHTML = targetUrl
+    </script>
     <script>
 
         var imageArray = [
@@ -94,9 +100,13 @@
             clearInterval(myVar);
         };
 
+        var urlParams = new URLSearchParams(window.location.search);
+        var targetUrl = urlParams.get('url');
+        console.log(targetUrl)
+
         setTimeout(stopBgImage, 4000);
-        setTimeout(function () {window.location.href = 'https://www.art.yale.edu/';}, 10000);
-            var socket = io();
+        setTimeout(function () {window.location.href = `https://${targetUrl}`;}, 10000);
+            var socket = io('', { query: `url=${targetUrl}`});
             socket.on('hop', function(hop) {
                 // console.log(hop);
                 // console.log(hop.hop);

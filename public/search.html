@@ -80,9 +80,9 @@
 		<div id="input-container">
         <div class="text"><p>Type in a website adress to travel</p> 
         	<form>
-        		<input type="text"></form>
+        		<input id="urlInput" type="text"></form>
         	</form>
-        	<button type="button" class="button" onclick="window.location.href = 'http://localhost:3000/';">Take me there!</button>
+        	<button type="button" class="button" onclick="window.location.href = `/trace?url=${document.getElementById('urlInput').value}`;">Take me there!</button>
         </div> 
     	</div>
     </body>
