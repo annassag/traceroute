@@ -49,7 +49,7 @@ io.on('connection', function(socket) {
 // 	console.log('listening on *:3000');
 // });
 
-const PORT = process.env.PORT || 3000;
-http.listen(PORT, () => {
-    console.log(`Our app is running on port ${ PORT }`);
-});
+// const PORT = process.env.PORT || 3000;
+// http.listen(PORT, () => {
+//     console.log(`Our app is running on port ${ PORT }`);
+// });
