@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <head>
-        <title>Trace Route</title>
+        <title>A Tunnel Space</title>
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
         <style type="text/css">
@@ -13,6 +13,8 @@
             background-repeat: no-repeat;
             background-size: cover;
             padding-left: 20px;
+            background-color: black;
+            z-index: 50;
         }
             
         .url {
@@ -24,6 +26,7 @@
             font-size: 25px;
             font-family: "Terminal";
             color: #5babfc;
+            z-index: 100;
         }
 
         #log {
@@ -31,7 +34,11 @@
             width: 1200px;
             height: 400px;
             position: absolute;
-            left: 12%;
+            left: 0;
+            right: 0;
+            bottom: 8%;
+            top: 0;
+            text-align: center;
             top: 39%;
             font-size: 65px;
             font-family: "Terminal";
@@ -66,7 +73,7 @@
     <body>
         <body>
         <div class="background"></div>
-        <div class="url" id="displayUrl">...</div>
+        <div class="url" id="displayUrl"></div><span>...</span>
         <div id="city"></div>
         <div id="log"></div>
 
@@ -75,7 +82,7 @@
         var urlParams = new URLSearchParams(window.location.search);
         var targetUrl = urlParams.get('url');
         var element = document.getElementById('displayUrl')
-        element.innerHTML = targetUrl
+        element.innerHTML = "http://"+targetUrl + "..."
     </script>
     <script>
 
@@ -106,6 +113,7 @@
 
         setTimeout(stopBgImage, 4000);
         setTimeout(function () {window.location.href = `https://${targetUrl}`;}, 10000);
+
             var socket = io('', { query: `url=${targetUrl}`});
             socket.on('hop', function(hop) {
                 // console.log(hop);
@@ -138,7 +146,7 @@
 
                     var div = $('<div id="city">')
                     .css({
-                        'width': '210px',
+                        'width': '230px',
                         'height':'40px',
                         "color": 'white',
                         "font-family": fonts[Math.floor(Math.random() * fonts.length)],

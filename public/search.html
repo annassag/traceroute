@@ -1,36 +1,52 @@
 <!doctype html>
 <html>
     <head>
-        <title>Trace Route</title>
+        <title>A Tunnel Space</title>
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
         <style type="text/css">
         body {
-
+            margin: 0;
+            background-color: black;
+/*            background-image: url("cable2.jpg");*/
+            background-position: top;
+            background-repeat: no-repeat;
+            background-size: cover;
         }
 
         #input-container {
         	margin: auto;
-        	width: 50%;
-        	padding-top: 15%;
+        	width: 80%;
+        	padding-top: 22%;
         }
 
          .text {
-            font-family: 'Option', sans-serif;
+            font-family: 'MoS Field Grot Cond';
             font-size: 40px;
             width: 100%;
             text-align: center;
         }
 
+        .http {
+            font-family: 'Terminal', sans-serif;
+            font-size: 56px;
+            color: #4188D7;
+            text-align: left; 
+            display: inline-block;
+        }
+
         input {
             font-family: 'Terminal', sans-serif;
-            font-size: 65px;
+            font-size: 56px;
             color: #4188D7;
-            text-align: center; 
-            border: 1px solid black;
-            width: 100%;
-            padding-top: 15px;
-/*            background-color:rgba(255,255,255,0.9);*/
+            text-align: left; 
+            width: 60%;
+            padding-top: 20px;
+            background-color:rgba(255,255,255,1);
+        }
+
+        form {
+            display: inline-block;
         }
 
         input:focus,
@@ -41,15 +57,16 @@
             }
 
         .button {
-            padding: 10px 15px;
+            padding: 15px 15px;
             text-align: center;
             text-decoration: none;
             font-size: 40px;
             font-family: 'Option', sans-serif;
-/*            background-color:rgba(255,255,255,0.6);*/
-			margin-top: 30px;
-            width: 40%;
-            height: 15%;
+            background-color:rgba(255,255,255,1);
+            border-radius: 50px;
+			margin-top: 32px;
+            width: 300px;
+            height: 80px;
         }
 
         @font-face {
@@ -78,11 +95,9 @@
         </head>
         <body>
 		<div id="input-container">
-        <div class="text"><p>Type in a website adress to travel</p> 
-        	<form>
-        		<input id="urlInput" type="text"></form>
-        	</form>
-        	<button type="button" class="button" onclick="window.location.href = `/trace?url=${document.getElementById('urlInput').value}`;">Take me there!</button>
+        <div class="text"><!-- <p>Type in a website adress to travel</p> -->        
+        	<form><span class="http">http://www.</span><input id="urlInput" type="text"></form><div></div>
+        	<button type="button" class="button" onclick="window.location.href = `/trace?url=${document.getElementById('urlInput').value}`;">Travel</button>
         </div> 
     	</div>
     </body>
