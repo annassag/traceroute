@@ -3,6 +3,7 @@ var app = express();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 var Traceroute = require('nodejs-traceroute');
+var fs = require('fs');
 
 app.use(express.static('public'));
 
