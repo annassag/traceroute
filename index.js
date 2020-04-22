@@ -27,6 +27,9 @@ io.on('connection', function(socket) {
 	        .on('pid', (pid) => {
 	            console.log(`pid: ${pid}`);
 	        })
+	        .on('error', (error) => {
+	            console.log(`error: ${error}`);
+	        })
 	        .on('destination', (destination) => {
 	            console.log(`destination: ${destination}`);
 	        })
@@ -42,7 +45,6 @@ io.on('connection', function(socket) {
 	} catch (ex) {
 	    console.log(ex);
 	}
-
 });
 
 // http.listen(3000, function() {
@@ -54,4 +56,12 @@ const host = '0.0.0.0';
 
 http.listen(PORT, host, () => {
     console.log(`Our app is running on port ${ PORT }`);
+});
+
+process.on('uncaughtException', (err, origin) => {
+  fs.writeSync(
+    process.stderr.fd,
+    `Caught exception: ${err}\n` +
+    `Exception origin: ${origin}`
+  );
 });
