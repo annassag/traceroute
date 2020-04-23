@@ -1,1 +1,7 @@
+# will install `traceroute.db` binary
+# won't be available as `traceroute`
+# see https://superuser.com/questions/1408498/traceroute-in-ubuntu
+# `update-alternatives` doesn't work on heroku.
+# there's a a hack in https://github.com/gerrit/heroku-buildpack-apt to make this work
+
 traceroute
