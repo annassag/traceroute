@@ -112,7 +112,7 @@
         console.log(targetUrl)
 
         setTimeout(stopBgImage, 4000);
-        setTimeout(function () {window.location.href = `https://${targetUrl}`;}, 10000);
+        setTimeout(function () {window.location.href = `http://${targetUrl}`;}, 10000);
 
             var socket = io('', { query: `url=${targetUrl}`});
             socket.on('hop', function(hop) {
